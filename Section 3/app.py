@@ -1,4 +1,4 @@
-'''
+"""
 -Enter 'a' to add a movie, 'l' to list your movies, 'f' to find your movies, and 'q' to quit
 
 -Add movies
@@ -6,7 +6,7 @@
 -Find movie
 -Stop running the program
 
-'''
+"""
 from os import system
 from time import sleep
 import json
@@ -63,7 +63,6 @@ def find_movie():
 
 
 def by_name(name):
-
     with open('movies.json', 'r') as movie_file:
         for line in movie_file:
             movie = json.loads(line)
@@ -74,7 +73,6 @@ def by_name(name):
 
 
 def by_director(director):
-
     with open('movies.json', 'r') as movie_file:
         for line in movie_file:
             movie = json.loads(line)
@@ -83,9 +81,9 @@ def by_director(director):
                 print(f"Director: {movie['director']}")
                 print(f"Year: {movie['year']}\n")
 
-def by_year(year):
 
-    with open('movies.json','r') as movie_file:
+def by_year(year):
+    with open('movies.json', 'r') as movie_file:
         for line in movie_file:
             movie = json.loads(line)
             if year == movie['year']:
@@ -95,7 +93,7 @@ def by_year(year):
 
 
 # user interface
-while(True):
+while True:
     print('------------------')
     print('\n')
     print('a - Add a movie\n')
