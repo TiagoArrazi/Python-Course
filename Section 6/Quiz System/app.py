@@ -1,8 +1,8 @@
 questions = list()
-questions_file = open('questions.txt', 'r')
 
-for line in questions_file:
-    questions.append(line.rstrip('\n'))
+with open('questions.txt', 'r') as questions_file:
+    for line in questions_file:
+        questions.append(line.rstrip('\n'))
 
 questions_file.close()
 
