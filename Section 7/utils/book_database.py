@@ -1,50 +1,59 @@
-import sqlite3
+from pip._vendor.distlib.compat import raw_input
+from pymongo import MongoClient
+
+client = MongoClient('localhost:27017')
+db = client.BookData
 
 
-class BookDatabase:
-    def __init__(self, db_name):
-        self.db_name = db_name
-        self.conn = sqlite3.connect(db_name)
+# Works
+def add_book():
+    try:
+        book_name = raw_input('Enter the name of the book: ')
+        book_author = raw_input('Enter the name of the author: ')
+        read = False
 
-    def is_table(self, table_name):
-        query = f"SELECT name FROM sqlite_master WHERE type='table' and name='{table_name}';"
-        cursor = self.conn.execute(query)
-        result = cursor.fetchone()
-        if result is None:
-            return False
-        else:
-            return True
+        db.BookData.insert_one({
+            'book_name': book_name,
+            'book_author': book_author,
+            'read': read
+        })
 
-    def add_book(self, name, author):
-        query = f"INSERT INTO book_shelf (name, author, read) values ('{name}','{author}',0)"
-        cursor = self.conn.execute(query)
-        return cursor
+    except Exception as e:
+        print(str(e))
 
-    def list_book(self):
-        cursor = self.conn.execute("SELECT * FROM book_shelf")
-        return cursor
 
-    def mark_as_read(self, name):
-        query = f"UPDATE book_shelf SET read=0 WHERE name='{name}'"
-        cursor = self.conn.execute(query)
-        return cursor
+# Works
+def list_all():
+    try:
+        book_col = db.BookData.find()
+        for book in book_col:
+            print(f"Book: {book['book_name']}")
+            print(f"Author: {book['book_author']}")
+            if book['read'] is True:
+                print('Already read it')
+            else:
+                print('Haven\'t read it yet\n')
 
-    def delete_book(self, name):
-        query = f"DELETE FROM book_shelf WHERE name='{name}'"
-        cursor = self.conn.execute(query)
-        return cursor
+    except Exception as e:
+        print(str(e))
+
+
+# Not working
+def mark_as_read():
+    try:
+        criteria = raw_input('Enter the name of the you have just read: ')
+
+        db.BookData.update_one(
+            {"name": criteria},
+            {
+                '$set': {
+                    'read': True
+                }
+            }
+        )
+    except Exception as e:
+        print(str(e))
 
 
 if __name__ == '__main__':
-    db = BookDatabase('book_db')
-    if not db.is_table('book_shelf'):
-        db.conn.execute('''CREATE TABLE book_shelf
-                           (id INTEGER PRIMARY KEY AUTOINCREMENT, 
-                           name TEXT, 
-                           author TEXT, 
-                           read INTEGER)''')
-    else:
-        pass
-
-    db.add_book('book_name_2', 'book_author_2')
-    print(db.list_book())
+    list_all()

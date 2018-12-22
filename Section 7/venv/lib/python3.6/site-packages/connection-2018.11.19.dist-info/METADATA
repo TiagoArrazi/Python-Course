@@ -1,0 +1,49 @@
+Metadata-Version: 2.1
+Name: connection
+Version: 2018.11.19
+Summary: check network connection
+Home-page: https://github.com/looking-for-a-job/connection.py
+License: UNKNOWN
+Keywords: connection
+Platform: UNKNOWN
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Topic :: Software Development
+Description-Content-Type: text/markdown
+Requires-Dist: public
+Requires-Dist: requests
+Requires-Dist: setuptools
+
+[![](https://img.shields.io/pypi/pyversions/connection.svg?longCache=True)](https://pypi.org/pypi/connection/)
+
+#### Install
+```bash
+$ [sudo] pip install connection
+```
+
+#### Functions
+function|description
+-|-
+`connection.check(timeout=None)`|return True if connection is ok, else False
+
+#### Examples
+```python
+>>> import connection
+>>> connection.check()
+True
+```
+
+timeout
+```python
+>>> connection.check(timeout=2)
+```
+
+<p align="center"><a href="https://pypi.org/project/readme-md/">readme-md</a> - README.md generator</p>
+
