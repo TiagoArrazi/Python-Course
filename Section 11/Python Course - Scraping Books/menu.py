@@ -11,9 +11,9 @@ def print_best_books():
         print(f'{book.title} - {book.rating} out of 5')
 
 
-def print_cheapest_books():
-    cheapest = sorted(books, key=lambda x: x.price)[:5]
-    print('---TOP 5 CHEAPEST BOOKS---')
+def print_cheapest_book():
+    cheapest = sorted(books, key=lambda x: x.price)[:1]
+    print('---CHEAPEST BOOK---')
     for book in cheapest:
         print(f'{book.title} - £{book.price:.2f}')
 
@@ -45,7 +45,7 @@ while True:
 
     elif opt.lower() == 'c':
         system('clear')
-        print_cheapest_books()
+        print_cheapest_book()
 
     elif opt.lower() == 'n':
         system('clear')
