@@ -3,7 +3,7 @@ from locators.quote_locators import QuoteLocators
 
 class QuoteParser:
     """
-    Given one of the specific quote divs, find out the about the data about
+    Given one of the specific quote divs, find out about the data about
     the quote (quote content, author, tags)
     """
     def __init__(self, parent):
