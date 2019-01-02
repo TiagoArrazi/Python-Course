@@ -30,6 +30,13 @@ def get_next_book():
 
 
 g = book_generator()
+
+CHOICES = {
+    'b': print_best_books,
+    'c': print_cheapest_book,
+    'n': get_next_book
+}
+
 while True:
     print('------------------')
     print('\n')
@@ -39,17 +46,8 @@ while True:
     print('q - Quit\n')
     opt = input('Welcome, please select an option \n')
 
-    if opt.lower() == 'b':
-        system('clear')
-        print_best_books()
-
-    elif opt.lower() == 'c':
-        system('clear')
-        print_cheapest_book()
-
-    elif opt.lower() == 'n':
-        system('clear')
-        get_next_book()
+    if opt.lower() in ('b', 'c', 'n'):
+        CHOICES[opt]()
 
     elif opt.lower() == 'q':
         print('Quitting')
