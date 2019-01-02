@@ -47,6 +47,7 @@ while True:
     opt = input('Welcome, please select an option \n')
 
     if opt.lower() in ('b', 'c', 'n'):
+        system('clear')
         CHOICES[opt]()
 
     elif opt.lower() == 'q':
