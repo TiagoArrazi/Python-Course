@@ -4,11 +4,19 @@ import re
 
 class BookParser:
 
+    RATINGS = {
+        'One': 1,
+        'Two': 2,
+        'Three': 3,
+        'Four': 4,
+        'Five': 5
+    }
+
     def __init__(self, parent):
         self.parent = parent
 
-    def __repr__(self):
-        return f'<Book: {self.title}, Price(£): {self.price}, Rating: {self.rating}>'
+    def __str__(self):
+        return f'Title: {self.title}, Price(£): {self.price}, Rating: {self.rating} out of 5'
 
     @property
     def title(self):
@@ -28,4 +36,4 @@ class BookParser:
         locator = BookLocators.RATING
         book_tag = self.parent.select_one(locator)
         book_rating = list(filter(lambda x: x != 'star-rating', book_tag.attrs['class']))[0]
-        return f'{book_rating} out of Five'
+        return self.RATINGS[book_rating]
