@@ -26,9 +26,9 @@ class BookParser:
     @property
     def price(self):
         locator = BookLocators.PRICE
-        regex = re.compile(r'£(\d+\.\d+)')
+        pattern = re.compile(r'£(\d+\.\d+)')
         book_price = self.parent.select_one(locator).string
-        float_book_price = float(regex.match(book_price).group(1))
+        float_book_price = float(pattern.match(book_price).group(1))
         return float_book_price
 
     @property
