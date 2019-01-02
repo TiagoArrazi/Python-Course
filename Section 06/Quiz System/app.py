@@ -4,9 +4,6 @@ with open('questions.txt', 'r') as questions_file:
     for line in questions_file:
         questions.append(line.rstrip('\n'))
 
-questions_file.close()
-
-
 score = 0
 for question in questions:
     try:
