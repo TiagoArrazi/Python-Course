@@ -2,6 +2,15 @@
 
 {% block content %}
 
-<h1>HOME</h1>
+<h1>Welcome to your blog</h1>
+<h2>Posts</h2>
+
+<ul>
+    {% for post_id, posts in posts.items(): %}
+        <li><a href="{{ url_for('post_it', post_id=post_id) }}">{{ posts['title'] }}</a></li>
+    {% endfor %}
+</ul>
+
+<a href="{{ url_for('create') }}">Create a new post</a>
 
 {% endblock %}

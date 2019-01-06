@@ -7,7 +7,7 @@ posts = {}
 
 @app.route('/')
 def home():
-    return render_template('home.html')
+    return render_template('home.html', posts=posts)
 
 
 @app.route('/post/<int:post_id>')
@@ -19,19 +19,16 @@ def post_it(post_id):
     return render_template('post.html', post=post)
 
 
-@app.route('/post/form')
-def form():
-    return render_template('create.html')
-
-
-@app.route('/post/create', methods=['GET', 'POST'])
+@app.route('/post/create', methods=['POST', 'GET'])
 def create():
-    title = request.form.get('title')
-    content = request.form.get('content')
-    post_id = len(posts)
-    posts[post_id] = {'id': post_id, 'title': title, 'content': content}
+    if request.method == 'POST':
+        title = request.form.get('title')
+        content = request.form.get('content')
+        post_id = len(posts)
+        posts[post_id] = {'id': post_id, 'title': title, 'content': content}
 
-    return redirect(url_for('post_it', post_id=post_id))
+        return redirect(url_for('post_it', post_id=post_id))
+    return render_template('create.html')
 
 
 if __name__ == '__main__':
